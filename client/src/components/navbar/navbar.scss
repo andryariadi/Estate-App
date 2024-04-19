@@ -1,0 +1,192 @@
+@import "../../responsive.scss";
+
+nav {
+  //   background-color: darkcyan;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+
+  .left {
+    // background-color: brown;
+    flex: 3;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    .logo {
+      transition: all 0.5s ease;
+      &:hover {
+        scale: 1.05;
+      }
+
+      img {
+        width: 150px;
+      }
+    }
+
+    .nav-link {
+      padding: 0.5rem;
+      position: relative;
+      font-size: 16px;
+
+      @include sm {
+        display: none;
+      }
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      width: calc(100% - 7px);
+      height: 2px;
+      background: #daa520;
+      border-radius: 10px;
+      transform: scale(0);
+      transition: all 0.6s ease;
+    }
+
+    .nav-link::after {
+      bottom: 0;
+      left: 4.3px;
+      transform-origin: center;
+    }
+
+    .nav-link:hover::before,
+    .nav-link:hover::after {
+      transform: scale(1);
+    }
+  }
+
+  .right {
+    background-color: darkorange;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #fde29f;
+    height: 100%;
+
+    @include md {
+      background-color: transparent;
+    }
+
+    a {
+      padding: 12px 20px;
+      margin: 20px;
+
+      @include md {
+        margin: 10px;
+      }
+
+      @include sm {
+        display: none;
+      }
+    }
+
+    .user {
+      background-color: aquamarine;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      span {
+        @include sm {
+          display: none;
+        }
+      }
+
+      .profile {
+        position: relative;
+        background-color: goldenrod;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 3px;
+
+        .notification {
+          background-color: crimson;
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          color: azure;
+          border-radius: 50%;
+          width: 26px;
+          height: 26px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .login {
+      background-color: brown;
+    }
+
+    .register {
+      background-color: goldenrod;
+      border-radius: 5%;
+    }
+
+    .menuIcon {
+      display: none;
+      z-index: 10;
+
+      @include sm {
+        display: initial;
+      }
+
+      .berger {
+        background-color: black;
+        padding: 10px;
+        border-radius: 50%;
+      }
+
+      .close {
+        background-color: black;
+        padding: 10px;
+        border-radius: 50%;
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+      }
+    }
+
+    .menu {
+      position: absolute;
+      top: 0;
+      right: -50%;
+      height: 100vh;
+      width: 50%;
+      background-color: black;
+      color: white;
+      transition: all 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+
+      &.active {
+        right: 0;
+      }
+
+      @include sm {
+        .nav-link {
+          display: initial;
+        }
+      }
+    }
+  }
+}

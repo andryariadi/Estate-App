@@ -1,0 +1,67 @@
+@import "../../responsive.scss";
+
+.layout {
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+
+  @include xl {
+    background-color: rgb(251, 190, 202);
+    max-width: 1220px;
+  }
+
+  @include lg {
+    background-color: rgb(187, 250, 187);
+    max-width: 950px;
+  }
+
+  @include md {
+    background-color: rgb(250, 233, 192);
+    max-width: 768px;
+  }
+
+  @include sm {
+    background-color: rgb(191, 237, 252);
+    max-width: 640px;
+  }
+
+  @include xs {
+    background-color: rgb(233, 190, 251);
+  }
+
+  .content {
+    background-color: crimson;
+    // flex: 1;
+    height: calc(100vh - 100px);
+    // overflow-y: scroll;
+    // padding-bottom: 100px;
+  }
+
+  .content {
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #6baf8d;
+    --sb-size: 5px;
+  }
+
+  .content::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+  .content::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 10px;
+  }
+
+  .content::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    .content {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+}

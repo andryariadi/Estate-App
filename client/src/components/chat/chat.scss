@@ -1,0 +1,154 @@
+.chat {
+  background-color: darkblue;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .messageContainer {
+    background-color: darkcyan;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: scroll;
+
+    h1 {
+      font-weight: 300;
+    }
+
+    .message {
+      background-color: azure;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+
+      img {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  //   scrollbar
+  .messageContainer {
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #6baf8d;
+    --sb-size: 5px;
+  }
+
+  .messageContainer::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+  .messageContainer::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 10px;
+  }
+
+  .messageContainer::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    .messageContainer {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+  //   scrollbar
+
+  .chatBox {
+    background-color: azure;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .top {
+      background-color: goldenrod;
+      padding: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .close {
+        cursor: pointer;
+      }
+    }
+
+    .center {
+      height: 200px;
+      overflow-y: scroll;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .chatMessage {
+        // background-color: #6baf8d;
+        width: 50%;
+
+        &.own {
+          align-self: flex-end;
+          text-align: end;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        span {
+          font-size: 12px;
+          background-color: goldenrod;
+          padding: 2px;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .bottom {
+      border-top: 2px solid goldenrod;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      textarea {
+        flex: 3;
+        height: 100%;
+        border: none;
+        padding: 20px;
+      }
+
+      button {
+        flex: 1;
+        background-color: goldenrod;
+        height: 100%;
+        border: none;
+      }
+    }
+  }
+}
