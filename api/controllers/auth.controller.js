@@ -55,6 +55,8 @@ class Controller {
         { expiresIn: age }
       );
 
+      const { password: userPassword, ...userInfo } = user;
+
       res
         .cookie("cookieName", token, {
           httpOnly: true,
@@ -62,7 +64,7 @@ class Controller {
           maxAge: age,
         })
         .status(200)
-        .json({ message: "Login successfully!" });
+        .json({ message: "Login successfully!", userInfo });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
