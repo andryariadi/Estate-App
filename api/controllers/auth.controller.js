@@ -58,20 +58,20 @@ class Controller {
       const { password: userPassword, ...userInfo } = user;
 
       res
-        .cookie("cookieName", token, {
+        .cookie("myCookie", token, {
           httpOnly: true,
           // secure: true,
           maxAge: age,
         })
         .status(200)
-        .json({ message: "Login successfully!", userInfo });
+        .json(userInfo);
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
     }
   }
   static logout(req, res) {
-    res.clearCookie("cookieName").status(200).json({ message: "Logout successfully!" });
+    res.clearCookie("myCookie").status(200).json({ message: "Logout successfully!" });
   }
 }
 

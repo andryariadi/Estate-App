@@ -1,5 +1,6 @@
 import apiRequest from "./apiRequest";
 
+// User
 export const createUser = async ({ username, email, password }) => {
   try {
     const res = await apiRequest.post(`/auth/register`, {
@@ -35,6 +36,7 @@ export const logoutUser = async () => {
   try {
     const res = await apiRequest.post(`/auth/logout`);
     localStorage.removeItem("user");
+    console.log(res);
   } catch (error) {
     console.log(error);
   }
