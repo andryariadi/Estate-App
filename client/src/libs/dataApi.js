@@ -23,7 +23,7 @@ export const loginUser = async ({ username, password }) => {
       password,
     });
 
-    localStorage.setItem("user", JSON.stringify(res.data));
+    // localStorage.setItem("user", JSON.stringify(res.data));
 
     return res.data;
   } catch (error) {
@@ -34,9 +34,8 @@ export const loginUser = async ({ username, password }) => {
 
 export const logoutUser = async () => {
   try {
-    const res = await apiRequest.post(`/auth/logout`);
-    localStorage.removeItem("user");
-    console.log(res);
+    await apiRequest.post(`/auth/logout`);
+    // localStorage.removeItem("user");
   } catch (error) {
     console.log(error);
   }

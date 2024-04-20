@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../libs/dataApi";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const { updateUser } = useContext(AuthContext);
 
   const [inputUser, setInputUser] = useState({
     username: "",
@@ -27,8 +30,9 @@ export default function Login() {
     setIsLoading(true);
     setError("");
     try {
-      await loginUser(inputUser);
-      navigate("/profile");
+      const data = await loginUser(inputUser);
+      updateUser(data);
+      navigate("/");
     } catch (err) {
       console.log(err);
       setError(err.response.data.message);

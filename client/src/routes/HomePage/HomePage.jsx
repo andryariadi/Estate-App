@@ -1,8 +1,13 @@
+import { useContext } from "react";
 import SearchBar from "../../components/searchBar/SearchBar";
 import "./homePage.scss";
 import CountUp from "react-countup";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function HomePage() {
+  const { currentUser } = useContext(AuthContext);
+
+  console.log(currentUser, "<----dihomepage");
   return (
     <>
       <main className="container">
