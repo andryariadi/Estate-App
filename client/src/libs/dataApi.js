@@ -16,6 +16,21 @@ export const createUser = async ({ username, email, password }) => {
   }
 };
 
+export const updatedUser = async ({ id, username, email, password }) => {
+  try {
+    const res = await apiRequest.put(`/user/${id}`, {
+      username,
+      email,
+      password,
+    });
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const loginUser = async ({ username, password }) => {
   try {
     const res = await apiRequest.post(`/auth/login`, {
