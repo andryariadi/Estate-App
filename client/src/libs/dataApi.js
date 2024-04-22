@@ -16,12 +16,13 @@ export const createUser = async ({ username, email, password }) => {
   }
 };
 
-export const updatedUser = async ({ id, username, email, password }) => {
+export const updatedUser = async ({ id, username, email, password, avatar }) => {
   try {
     const res = await apiRequest.put(`/user/${id}`, {
       username,
       email,
       password,
+      avatar,
     });
 
     return res.data;

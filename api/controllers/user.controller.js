@@ -61,9 +61,11 @@ class Controller {
         },
       });
 
-      res.status(200).json(updateUser);
+      const { password: userPassword, ...userInfo } = updateUser;
 
-      console.log(updateUser, "<---usercontroller");
+      res.status(200).json(userInfo);
+
+      console.log(userInfo, "<---usercontroller");
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
