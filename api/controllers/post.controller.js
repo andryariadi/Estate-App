@@ -6,6 +6,8 @@ class Controller {
       const posts = await prisma.post.findMany();
 
       res.status(200).json(posts);
+
+      console.log(posts, "<---postcontroller");
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
@@ -19,6 +21,15 @@ class Controller {
       const post = await prisma.post.findUnique({
         where: {
           id,
+        },
+        include: {
+          postDetail: true,
+          user: {
+            select: {
+              username: true,
+              avatar: true,
+            },
+          },
         },
       });
 
@@ -36,8 +47,11 @@ class Controller {
     try {
       const newPost = await prisma.post.create({
         data: {
-          ...body,
+          ...body.postData,
           userId: tokenUserId,
+          postDetail: {
+            create: body.postDetail,
+          },
         },
       });
 
