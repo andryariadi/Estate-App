@@ -56,3 +56,18 @@ export const logoutUser = async () => {
     console.log(error);
   }
 };
+
+// Posts
+export const createPost = async ({ postData, postDetail }) => {
+  try {
+    const res = await apiRequest.post(`/posts`, {
+      postData,
+      postDetail,
+    });
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
