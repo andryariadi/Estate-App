@@ -18,6 +18,8 @@ export default function NewPostPage() {
 
     const inputs = Object.fromEntries(formData);
 
+    // console.log(inputs, "<----dinewpostpage1");
+
     try {
       const data = await createPost({
         postData: {
@@ -44,7 +46,9 @@ export default function NewPostPage() {
           restaurant: parseInt(inputs.restaurant),
         },
       });
-      navigate("/" + data.id);
+      navigate("/" + data.post.id);
+
+      // console.log(data, "<----dinewpostpage2");
     } catch (error) {
       console.log(error);
       setError(error.response.data.message);
