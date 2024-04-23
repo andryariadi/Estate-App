@@ -129,6 +129,35 @@
       }
     }
 
+    // Scrollbar
+
+    .center {
+      --sb-track-color: #232e33;
+      --sb-thumb-color: #6baf8d;
+      --sb-size: 5px;
+    }
+
+    .center::-webkit-scrollbar {
+      width: var(--sb-size);
+    }
+
+    .center::-webkit-scrollbar-track {
+      background: var(--sb-track-color);
+      border-radius: 10px;
+    }
+
+    .center::-webkit-scrollbar-thumb {
+      background: var(--sb-thumb-color);
+      border-radius: 10px;
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+      .center {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+      }
+    }
+    // Scrollbar
+
     .bottom {
       border-top: 2px solid goldenrod;
       height: 60px;

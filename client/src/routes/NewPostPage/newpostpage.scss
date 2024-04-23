@@ -4,7 +4,7 @@
 
   .formContainer {
     flex: 3;
-    overflow: scroll;
+    overflow-y: scroll;
 
     .wrapper {
       margin: 30px 50px 100px 0px;
@@ -56,6 +56,35 @@
       }
     }
   }
+
+  //   Scrollbar
+
+  .formContainer {
+    --sb-track-color: #232e33;
+    --sb-thumb-color: #6baf8d;
+    --sb-size: 5px;
+  }
+
+  .formContainer::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+  .formContainer::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 10px;
+  }
+
+  .formContainer::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    .formContainer {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+  //   Scrollbar
 
   .sideContainer {
     flex: 2;
