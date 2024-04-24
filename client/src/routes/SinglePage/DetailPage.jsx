@@ -1,8 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
-import { singlePostData, userData } from "../../libs/dummydata";
+import { singlePostData } from "../../libs/dummydata";
 import "./detailpage.scss";
+import DOMPurify from "dompurify";
 
 export default function DetailPage() {
   const detailData = singlePostData;
@@ -32,7 +33,7 @@ export default function DetailPage() {
                   <span>{post.user.username}</span>
                 </div>
               </div>
-              <div className="bottom">{post.postDetail.desc}</div>
+              <div className="bottom" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.postDetail.desc) }}></div>
             </div>
           </div>
         </div>
@@ -103,7 +104,7 @@ export default function DetailPage() {
             </div>
             <div className="title">Location</div>
             <div className="mapContainer">
-              <Map items={[detailData]} />
+              <Map items={[post]} />
             </div>
             <div className="buttons">
               <button>
