@@ -7,7 +7,7 @@ const types = ["buy", "rent"];
 export default function SearchBar() {
   const [value, setValue] = useState({
     type: "buy",
-    location: "",
+    city: "",
     minPrice: 0,
     maxPrice: 0,
   });
@@ -25,7 +25,7 @@ export default function SearchBar() {
           ))}
         </div>
         <form action="">
-          <input type="text" name="location" placeholder="City Location" />
+          <input type="text" name="city" placeholder="City Location" />
           <input type="number" name="minPrice" min={0} max={10000000} placeholder="Min Price" />
           <input type="number" name="maxPrice" min={0} max={10000000} placeholder="Max Price" />
           <button>

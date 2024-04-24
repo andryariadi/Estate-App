@@ -2,12 +2,26 @@ import prisma from "../libs/prisma.js";
 
 class Controller {
   static async getPosts(req, res) {
+    const query = req.query;
+    console.log(query, "<---digetpostss");
+
     try {
-      const posts = await prisma.post.findMany();
+      const posts = await prisma.post.findMany({
+        where: {
+          city: query.city || undefined,
+          type: query.type || undefined,
+          property: query.property || undefined,
+          price: {
+            gte: parseInt(query.minPrice) || 0,
+            lte: parseInt(query.maxPrice) || 10000000,
+          },
+          bedroom: parseInt(query.bedroom) || undefined,
+        },
+      });
 
       res.status(200).json(posts);
 
-      console.log(posts, "<---postcontroller");
+      // console.log(posts, "<---postcontroller");
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
