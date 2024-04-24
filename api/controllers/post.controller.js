@@ -19,6 +19,10 @@ class Controller {
         },
       });
 
+      // setTimeout(() => {
+      //   res.status(200).json(posts);
+      // }, 1000);
+
       res.status(200).json(posts);
 
       // console.log(posts, "<---postcontroller");

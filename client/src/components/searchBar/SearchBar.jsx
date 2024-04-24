@@ -33,7 +33,7 @@ export default function SearchBar() {
             </button>
           ))}
         </div>
-        <form action="">
+        <form>
           <input type="text" name="city" value={query.city} placeholder="City Location" onChange={handleChange} />
           <input type="number" name="minPrice" value={query.minPrice} min={0} max={10000000} placeholder="Min Price" onChange={handleChange} />
           <input type="number" name="maxPrice" value={query.maxPrice} min={0} max={10000000} placeholder="Max Price" onChange={handleChange} />

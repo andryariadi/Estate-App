@@ -3,14 +3,15 @@ import { listData } from "../../libs/dummydata";
 import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
-import { useLoaderData } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
+import { Suspense } from "react";
 
 export default function ListPage() {
   // const data = listData;
 
-  const posts = useLoaderData();
+  const data = useLoaderData();
 
-  console.log(posts, "<---dilistpage");
+  console.log(data, "<---dilistpage1");
 
   return (
     <>
@@ -18,13 +19,19 @@ export default function ListPage() {
         <div className="listContainer">
           <div className="wrapper">
             <Filter />
-            {posts.map((item) => (
-              <Card key={item.id} item={item} />
-            ))}
+            <Suspense fallback={<div>Loading nih boss...</div>}>
+              <Await resolve={data.postResponse} errorElement={<p>Error loading posts!</p>}>
+                {(postResponse) => postResponse.data.map((post) => <Card key={post.id} item={post} />)}
+              </Await>
+            </Suspense>
           </div>
         </div>
         <div className="mapContainer">
-          <Map items={posts} />
+          <Suspense fallback={<div>Loading nih boss...</div>}>
+            <Await resolve={data.postResponse} errorElement={<p>Error loading posts!</p>}>
+              {(postResponse) => <Map items={postResponse.data} />}
+            </Await>
+          </Suspense>
         </div>
       </div>
     </>
