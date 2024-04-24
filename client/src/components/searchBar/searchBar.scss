@@ -66,6 +66,7 @@
       background-color: goldenrod;
       border: none;
       width: 60px;
+      height: 100%;
 
       @include xs {
         width: 100%;
