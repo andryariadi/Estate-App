@@ -2,6 +2,7 @@ import "./card.scss";
 import { Link } from "react-router-dom";
 export default function Card({ item }) {
   console.log(item, "<----dicard");
+
   return (
     <>
       <div className="card">

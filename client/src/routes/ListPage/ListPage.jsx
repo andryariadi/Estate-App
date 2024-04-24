@@ -5,6 +5,8 @@ import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
 import { Await, useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
+import LoaderPost from "../../components/LoaderPost/LoaderPost";
+import ErrorPost from "../../components/ErrorPost/ErrorPost";
 
 export default function ListPage() {
   // const data = listData;
@@ -19,16 +21,16 @@ export default function ListPage() {
         <div className="listContainer">
           <div className="wrapper">
             <Filter />
-            <Suspense fallback={<div>Loading nih boss...</div>}>
-              <Await resolve={data.postResponse} errorElement={<p>Error loading posts!</p>}>
+            <Suspense fallback={<LoaderPost />}>
+              <Await resolve={data.postResponse} errorElement={<ErrorPost />}>
                 {(postResponse) => postResponse.data.map((post) => <Card key={post.id} item={post} />)}
               </Await>
             </Suspense>
           </div>
         </div>
         <div className="mapContainer">
-          <Suspense fallback={<div>Loading nih boss...</div>}>
-            <Await resolve={data.postResponse} errorElement={<p>Error loading posts!</p>}>
+          <Suspense fallback={<LoaderPost />}>
+            <Await resolve={data.postResponse} errorElement={<ErrorPost />}>
               {(postResponse) => <Map items={postResponse.data} />}
             </Await>
           </Suspense>

@@ -21,7 +21,7 @@ class Controller {
 
       // setTimeout(() => {
       //   res.status(200).json(posts);
-      // }, 1000);
+      // }, 5000);
 
       res.status(200).json(posts);
 
