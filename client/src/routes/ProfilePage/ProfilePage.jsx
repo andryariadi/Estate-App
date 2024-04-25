@@ -1,16 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Await, Link, useLoaderData, useNavigate } from "react-router-dom";
 import Chat from "../../components/chat/Chat";
 import ListCard from "../../components/listCard/ListCard";
 import "./profile.scss";
 import { logoutUser } from "../../libs/dataApi";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import ErrorPost from "../../components/ErrorPost/ErrorPost";
+import LoaderPost from "../../components/LoaderPost/LoaderPost";
 
 export default function ProfilePage() {
-  const navigate = useNavigate();
+  const data = useLoaderData();
 
   const { currentUser, updateUser } = useContext(AuthContext);
 
+  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await logoutUser();
@@ -49,11 +52,19 @@ export default function ProfilePage() {
               <button>Create New Post</button>
             </Link>
           </div>
-          <ListCard />
+          <Suspense fallback={<LoaderPost />}>
+            <Await resolve={data.postResponse} errorElement={<ErrorPost />}>
+              {(postResponse) => <ListCard posts={postResponse.data.userPosts} />}
+            </Await>
+          </Suspense>
           <div className="title">
             <h1>Saved List</h1>
           </div>
-          <ListCard />
+          <Suspense fallback={<LoaderPost />}>
+            <Await resolve={data.postResponse} errorElement={<ErrorPost />}>
+              {(postResponse) => <ListCard posts={postResponse.data.savedPosts} />}
+            </Await>
+          </Suspense>
         </div>
       </div>
       <div className="chatContainer">

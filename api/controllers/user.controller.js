@@ -114,7 +114,7 @@ class Controller {
             id: savedPost.id,
           },
         });
-        res.status(200).json({ message: "Post deleted from saved list!" });
+        res.status(200).json({ message: "Post removed from saved list" });
       } else {
         await prisma.savedPost.create({
           data: {
@@ -122,7 +122,7 @@ class Controller {
             postId,
           },
         });
-        res.status(200).json({ message: "Post saved!" });
+        res.status(200).json({ message: "Post saved" });
       }
     } catch (error) {
       console.log(error);
