@@ -1,4 +1,5 @@
 import prisma from "../libs/prisma.js";
+import jwt from "jsonwebtoken";
 
 class Controller {
   static async getPosts(req, res) {
@@ -51,7 +52,25 @@ class Controller {
         },
       });
 
-      res.status(200).json(post);
+      const token = req.cookies.myCookie;
+
+      if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
+          if (!err) {
+            const saved = await prisma.savedPost.findUnique({
+              where: {
+                userId_postId: {
+                  postId: id,
+                  userId: payload.id,
+                },
+              },
+            });
+            res.status(200).json({ ...post, isSaved: saved ? true : false });
+          }
+        });
+      }
+
+      res.status(200).json({ ...post, isSaved: false });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
