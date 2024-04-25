@@ -129,6 +129,34 @@ class Controller {
       res.status(500).json({ message: "Internal server error" });
     }
   }
+
+  static async getProfilePosts(req, res) {
+    const tokenUserId = req.userId;
+
+    try {
+      const userPosts = await prisma.post.findMany({
+        where: {
+          userId: tokenUserId,
+        },
+      });
+
+      const savePost = await prisma.savedPost.findMany({
+        where: {
+          userId: tokenUserId,
+        },
+        include: {
+          post: true,
+        },
+      });
+
+      const savedPosts = savePost.map((post) => post.post);
+
+      res.status(200).json({ userPosts, savedPosts });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
 }
 
 export default Controller;

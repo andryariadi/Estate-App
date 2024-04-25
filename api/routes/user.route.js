@@ -5,9 +5,10 @@ import { verifyToken } from "../middleware/verifyToken.js";
 const router = express.Router();
 
 router.get("/", Controller.getUsers);
-router.get("/:id", verifyToken, Controller.getUserById);
+// router.get("/:id", verifyToken, Controller.getUserById);
 router.put("/:id", verifyToken, Controller.updateUser);
 router.delete("/:id", verifyToken, Controller.deleteUser);
 router.post("/save", verifyToken, Controller.savePost);
+router.get("/profilePosts", verifyToken, Controller);
 
 export default router;

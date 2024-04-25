@@ -12,3 +12,8 @@ export const listPageLoader = async ({ request, params }) => {
   const postPromise = apiRequest("/posts?" + query);
   return defer({ postResponse: postPromise });
 };
+
+export const profilePageLoader = async () => {
+  const postPromise = apiRequest("/user/profilePosts");
+  return defer({ postResponse: postPromise });
+};
