@@ -71,3 +71,15 @@ export const createPost = async ({ postData, postDetail }) => {
     throw error;
   }
 };
+
+export const savedPost = async ({ postId }) => {
+  try {
+    const res = await apiRequest.post(`/user/save`, {
+      postId,
+    });
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

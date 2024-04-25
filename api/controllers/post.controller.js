@@ -34,7 +34,7 @@ class Controller {
   }
 
   static async getPostById(req, res) {
-    const { id } = req.params;
+    const id = req.params.id;
 
     try {
       const post = await prisma.post.findUnique({
@@ -52,7 +52,7 @@ class Controller {
         },
       });
 
-      const token = req.cookies.myCookie;
+      const token = req.cookies?.myCookie;
 
       if (token) {
         jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
@@ -66,11 +66,13 @@ class Controller {
               },
             });
             res.status(200).json({ ...post, isSaved: saved ? true : false });
+          } else {
+            res.status(500).json({ message: "Internal server error" });
           }
         });
+      } else {
+        res.status(200).json({ ...post, isSaved: false });
       }
-
-      res.status(200).json({ ...post, isSaved: false });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });

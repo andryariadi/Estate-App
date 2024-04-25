@@ -1,16 +1,34 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Map from "../../components/map/Map";
 import Slider from "../../components/slider/Slider";
-import { singlePostData } from "../../libs/dummydata";
 import "./detailpage.scss";
 import DOMPurify from "dompurify";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { savedPost } from "../../libs/dataApi";
 
 export default function DetailPage() {
-  const detailData = singlePostData;
-
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const post = useLoaderData();
+  const [saved, setSaved] = useState(post.isSaved);
 
   console.log(post, "<----disinglepage");
+
+  const handleSavePost = async () => {
+    setSaved((prev) => !prev);
+    if (!currentUser) {
+      navigate("/login");
+    }
+
+    try {
+      const data = await savedPost({ postId: post.id });
+      console.log(data, "<----disavepost");
+    } catch (error) {
+      console.log(error);
+      setSaved((prev) => !prev);
+    }
+  };
 
   return (
     <>
@@ -111,9 +129,14 @@ export default function DetailPage() {
                 <img src="/chat.png" alt="" />
                 Send a Message
               </button>
-              <button>
+              <button
+                onClick={handleSavePost}
+                style={{
+                  backgroundColor: saved ? "goldenrod" : "white",
+                }}
+              >
                 <img src="/save.png" alt="" />
-                Save the Place
+                {saved ? "Place Saved" : "Save the Place"}
               </button>
             </div>
           </div>
