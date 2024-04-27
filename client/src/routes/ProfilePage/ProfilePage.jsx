@@ -69,7 +69,11 @@ export default function ProfilePage() {
       </div>
       <div className="chatContainer">
         <div className="wrapper">
-          <Chat />
+          <Suspense fallback={<LoaderPost />}>
+            <Await resolve={data.chatResponse} errorElement={<ErrorPost />}>
+              {(chatResponse) => <Chat chats={chatResponse.data} />}
+            </Await>
+          </Suspense>
         </div>
       </div>
     </div>

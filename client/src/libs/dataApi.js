@@ -83,3 +83,14 @@ export const savedPost = async ({ postId }) => {
     console.log(error);
   }
 };
+
+// Chats
+export const singleChat = async (id) => {
+  try {
+    const res = await apiRequest(`/chats/${id}`);
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

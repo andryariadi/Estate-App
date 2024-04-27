@@ -13,6 +13,23 @@ class Controller {
         },
       });
 
+      for (const chat of chats) {
+        const reciverdId = chat.userIDs.find((id) => id !== tokenUsrId);
+
+        const reciver = await prisma.user.findUnique({
+          where: {
+            id: reciverdId,
+          },
+          select: {
+            id: true,
+            username: true,
+            avatar: true,
+          },
+        });
+
+        chat.reciver = reciver;
+      }
+
       res.status(200).json(chats);
 
       console.log(chats, "<----dichatcontroller");
