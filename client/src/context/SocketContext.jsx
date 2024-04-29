@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
+
 export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
@@ -7,7 +8,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     setSocket(io("http://localhost:4000"));
-  }, [socket]);
+  }, []);
 
   return <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>;
 };

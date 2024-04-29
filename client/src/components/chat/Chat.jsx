@@ -4,10 +4,12 @@ import { AuthContext } from "../../context/AuthContext";
 import { singleChat } from "../../libs/dataApi";
 import { format } from "timeago.js";
 import apiRequest from "../../libs/apiRequest";
+import { SocketContext } from "../../context/SocketContext";
 
 export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
   const { currentUser } = useContext(AuthContext);
+  const { socket } = useContext(SocketContext);
 
   const handleOpenChat = async (id, reciver) => {
     try {
@@ -32,6 +34,11 @@ export default function Chat({ chats }) {
       setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
 
       e.target.reset();
+
+      socket.emit("sendMessage", {
+        reciverId: chat.reciver.id,
+        data: res.data,
+      });
     } catch (error) {
       console.log(error);
     }
