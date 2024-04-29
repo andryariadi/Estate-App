@@ -3,6 +3,7 @@ import "./chat.scss";
 import { AuthContext } from "../../context/AuthContext";
 import { singleChat } from "../../libs/dataApi";
 import { format } from "timeago.js";
+import apiRequest from "../../libs/apiRequest";
 
 export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
@@ -12,6 +13,25 @@ export default function Chat({ chats }) {
     try {
       const data = await singleChat(id);
       setChat({ ...data, reciver });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmitChat = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const text = formData.get("text");
+
+    if (!text) return;
+
+    try {
+      const res = await apiRequest.post(`/messages/${chat.id}`, { text });
+
+      setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
+
+      e.target.reset();
     } catch (error) {
       console.log(error);
     }
@@ -64,10 +84,10 @@ export default function Chat({ chats }) {
               </div>
             ))}
           </div>
-          <div className="bottom">
-            <textarea></textarea>
+          <form className="bottom" onSubmit={handleSubmitChat}>
+            <textarea name="text"></textarea>
             <button>Send</button>
-          </div>
+          </form>
         </div>
       )}
     </div>
