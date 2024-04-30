@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./chat.scss";
 import { AuthContext } from "../../context/AuthContext";
 import { singleChat } from "../../libs/dataApi";
@@ -10,6 +10,12 @@ export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
+
+  const messageEndRef = useRef();
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
 
   const handleOpenChat = async (id, reciver) => {
     try {
@@ -44,6 +50,29 @@ export default function Chat({ chats }) {
     }
   };
 
+  useEffect(() => {
+    const read = async () => {
+      try {
+        await apiRequest.put(`/chats/read/${chat.id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (chat && socket) {
+      socket.on("getMessage", (data) => {
+        if (chat.id === data.chatId) {
+          setChat((prev) => ({ ...prev, messages: [...prev.messages, data] }));
+          read();
+        }
+      });
+    }
+
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [chat, socket]);
+
   console.log(chat, "<---dichatspage");
 
   return (
@@ -55,7 +84,7 @@ export default function Chat({ chats }) {
             className="message"
             key={cht.id}
             style={{
-              backgroundColor: cht.seenBy.includes(currentUser.id) ? "white" : "goldenrod",
+              backgroundColor: cht.seenBy.includes(currentUser.id) || chat?.id === cht.id ? "white" : "goldenrod",
             }}
             onClick={() => handleOpenChat(cht.id, cht.reciver)}
           >
@@ -90,6 +119,7 @@ export default function Chat({ chats }) {
                 <span>{format(message.createdAt)}</span>
               </div>
             ))}
+            <div ref={messageEndRef}></div>
           </div>
           <form className="bottom" onSubmit={handleSubmitChat}>
             <textarea name="text"></textarea>
