@@ -5,6 +5,7 @@ import { singleChat } from "../../libs/dataApi";
 import { format } from "timeago.js";
 import apiRequest from "../../libs/apiRequest";
 import { SocketContext } from "../../context/SocketContext";
+import { useNotificationStore } from "../../libs/notificationStore";
 
 export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
@@ -13,6 +14,8 @@ export default function Chat({ chats }) {
 
   const messageEndRef = useRef();
 
+  const decrease = useNotificationStore((state) => state.decrease);
+
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat]);
@@ -20,6 +23,7 @@ export default function Chat({ chats }) {
   const handleOpenChat = async (id, reciver) => {
     try {
       const data = await singleChat(id);
+      if (data.seenBy.includes(currentUser.id)) decrease();
       setChat({ ...data, reciver });
     } catch (error) {
       console.log(error);

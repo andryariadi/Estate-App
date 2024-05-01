@@ -157,6 +157,29 @@ class Controller {
       res.status(500).json({ message: "Internal server error" });
     }
   }
+
+  static async getNotifications(req, res) {
+    const tokenUserId = req.userId;
+    try {
+      const number = await prisma.chat.count({
+        where: {
+          userIDs: {
+            hasSome: [tokenUserId],
+          },
+          NOT: {
+            seenBy: {
+              hasSome: [tokenUserId],
+            },
+          },
+        },
+      });
+
+      res.status(200).json(number);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
 }
 
 export default Controller;
