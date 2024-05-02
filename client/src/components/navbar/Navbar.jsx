@@ -40,8 +40,10 @@ export default function Navbar() {
         <div className="right">
           {currentUser ? (
             <div className="user">
-              <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
-              <span>{currentUser.username}</span>
+              <Link to="/profile" className="profileImg">
+                <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
+                <span>{currentUser.username}</span>
+              </Link>
               <Link to="/profile" className="profile">
                 {number > 0 && <div className="notification">{number}</div>}
                 <span>Profile</span>
@@ -85,12 +87,20 @@ export default function Navbar() {
             <Link className="nav-link" to="/">
               Agents
             </Link>
-            <Link className="nav-link" to="/">
-              Sign In
-            </Link>
-            <Link className="nav-link" to="/">
-              Sign Up
-            </Link>
+            {currentUser ? (
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
+            ) : (
+              <>
+                <Link className="nav-link" to="/login">
+                  Sign In
+                </Link>
+                <Link className="nav-link" to="/register">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>

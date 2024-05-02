@@ -32,7 +32,7 @@ class Controller {
 
       res.status(200).json(chats);
 
-      console.log(chats, "<----dichatcontroller");
+      // console.log(chats, "<----dichatcontroller");
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
@@ -70,7 +70,7 @@ class Controller {
       });
       res.status(200).json(chat);
 
-      console.log(chat, "<----dichatcontroller");
+      // console.log(chat, "<----dichatcontroller");
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });
@@ -113,8 +113,6 @@ class Controller {
       });
 
       res.status(200).json(chat);
-
-      console.log(newChat, "<----dichatcontroller");
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });

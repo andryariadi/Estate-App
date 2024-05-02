@@ -22,6 +22,10 @@ nav {
 
       img {
         width: 150px;
+
+        @include xs {
+          width: 140px;
+        }
       }
     }
 
@@ -72,12 +76,12 @@ nav {
     }
 
     a {
-      padding: 12px 20px;
-      margin: 20px;
+      padding: 12px 0;
+      // margin: 20px;
 
-      @include md {
-        margin: 10px;
-      }
+      // @include md {
+      //   margin: 10px;
+      // }
 
       @include sm {
         display: none;
@@ -88,7 +92,18 @@ nav {
       background-color: aquamarine;
       display: flex;
       align-items: center;
+      justify-content: center;
+      width: 300px;
+      gap: 15px;
       font-weight: bold;
+
+      @include sm {
+        width: 150px;
+      }
+
+      @include xs {
+        width: 50px;
+      }
 
       img {
         width: 40px;
@@ -99,9 +114,16 @@ nav {
       }
 
       span {
-        @include sm {
+        @include xs {
           display: none;
         }
+      }
+
+      .profileImg {
+        // background-color: red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .profile {
@@ -129,11 +151,13 @@ nav {
 
     .login {
       background-color: brown;
+      height: fit-content;
     }
 
     .register {
       background-color: goldenrod;
       border-radius: 5%;
+      height: fit-content;
     }
 
     .menuIcon {
