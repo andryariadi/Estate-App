@@ -50,14 +50,14 @@ export default function Navbar() {
               </Link>
             </div>
           ) : (
-            <>
+            <div className="user">
               <Link to="/login" className="login">
                 Sign In
               </Link>
               <Link to="/register" className="register">
                 Sign Up
               </Link>
-            </>
+            </div>
           )}
 
           {/* sidebar */}

@@ -19,6 +19,10 @@
 
       @include sm {
         padding: 0;
+        gap: 75px;
+      }
+      @include xs {
+        gap: 40px;
       }
 
       .title {
@@ -27,6 +31,16 @@
 
         @include lg {
           font-size: 40px;
+          line-height: 50px;
+        }
+
+        @include sm {
+          font-size: 57px;
+          line-height: 70px;
+        }
+
+        @include xs {
+          font-size: 37px;
           line-height: 50px;
         }
       }
