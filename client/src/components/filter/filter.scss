@@ -1,3 +1,5 @@
+@import "../../responsive.scss";
+
 .filter {
   display: flex;
   flex-direction: column;
@@ -24,6 +26,14 @@
       border: 1px solid #e0e0e0;
       border-radius: 5px;
       font-size: 14px;
+
+      @include lg {
+        width: 80px;
+      }
+
+      @include sm {
+        width: 90px;
+      }
     }
   }
 
@@ -37,6 +47,20 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+
+    @include lg {
+      flex-wrap: wrap;
+      justify-content: start;
+      gap: 11px;
+    }
+
+    @include sm {
+      gap: 15px;
+    }
+
+    @include xs {
+      column-gap: 40px;
+    }
 
     button {
       background-color: goldenrod;

@@ -1,5 +1,4 @@
 import "./listPage.scss";
-import { listData } from "../../libs/dummydata";
 import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
@@ -19,6 +18,7 @@ export default function ListPage() {
     <>
       <div className="container">
         <div className="listContainer">
+          {/* <div>Ariadi</div> */}
           <div className="wrapper">
             <Filter />
             <Suspense fallback={<LoaderPost />}>
@@ -29,6 +29,7 @@ export default function ListPage() {
           </div>
         </div>
         <div className="mapContainer">
+          {/* <div>Andry</div> */}
           <Suspense fallback={<LoaderPost />}>
             <Await resolve={data.postResponse} errorElement={<ErrorPost />}>
               {(postResponse) => <Map items={postResponse.data} />}
