@@ -1,6 +1,12 @@
+@import "../../responsive.scss";
+
 .login {
   height: 100%;
   display: flex;
+
+  @include sm {
+    flex-direction: column;
+  }
 
   .formContainer {
     flex: 3;
@@ -8,6 +14,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include lg {
+      flex: 3.25;
+    }
 
     form {
       display: flex;
@@ -54,8 +64,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     img {
       width: 100%;
+    }
+
+    @include sm {
+      display: none;
     }
   }
 }
