@@ -8,6 +8,7 @@
   @include sm {
     flex-direction: column;
     overflow: scroll;
+    gap: 10px;
   }
 
   .details {
@@ -26,6 +27,10 @@
       display: flex;
       flex-direction: column;
       gap: 50px;
+
+      @include sm {
+        padding: 0;
+      }
 
       .title {
         display: flex;
