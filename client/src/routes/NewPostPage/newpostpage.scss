@@ -1,11 +1,21 @@
+@import "../../responsive.scss";
+
 .newPostPage {
   height: 100%;
   display: flex;
+
+  @include sm {
+    flex-direction: column;
+    gap: 10px;
+  }
 
   .formContainer {
     flex: 3;
     overflow-y: scroll;
 
+    @include lg {
+      flex: 3.25;
+    }
     .wrapper {
       margin: 30px 50px 100px 0px;
 
