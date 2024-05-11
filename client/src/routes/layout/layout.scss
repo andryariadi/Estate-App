@@ -8,27 +8,27 @@
   flex-direction: column;
 
   @include xl {
-    background-color: rgb(251, 190, 202);
+    // background-color: rgb(251, 190, 202);
     max-width: 1220px;
   }
 
   @include lg {
-    background-color: rgb(187, 250, 187);
+    // background-color: rgb(187, 250, 187);
     max-width: 950px;
   }
 
   @include md {
-    background-color: rgb(250, 233, 192);
+    // background-color: rgb(250, 233, 192);
     max-width: 768px;
   }
 
   @include sm {
-    background-color: rgb(191, 237, 252);
+    // background-color: rgb(191, 237, 252);
     max-width: 640px;
   }
 
   @include xs {
-    background-color: rgb(233, 190, 251);
+    // background-color: rgb(233, 190, 251);
   }
 
   .content {

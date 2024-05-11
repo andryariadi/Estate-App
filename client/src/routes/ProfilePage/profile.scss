@@ -1,7 +1,7 @@
 @import "../../responsive.scss";
 
 .profile {
-  background-color: brown;
+  // background-color: brown;
   display: flex;
   height: 100%;
 
@@ -12,7 +12,7 @@
   }
 
   .details {
-    background-color: cadetblue;
+    // background-color: cadetblue;
     flex: 3.03;
     overflow-y: scroll;
 
@@ -22,7 +22,7 @@
     }
 
     .wrapper {
-      background-color: chocolate;
+      // background-color: chocolate;
       padding-right: 50px;
       display: flex;
       flex-direction: column;

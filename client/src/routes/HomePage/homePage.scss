@@ -5,11 +5,11 @@
   height: 100%;
 
   .textConteiner {
-    background-color: teal;
+    // background-color: teal;
     flex: 3;
 
     .wrapper {
-      background-color: cornflowerblue;
+      // background-color: cornflowerblue;
       padding-right: 100px;
       display: flex;
       flex-direction: column;
@@ -64,7 +64,7 @@
           .countNum {
             font-size: 40px;
             font-weight: 550;
-            background-color: crimson;
+            // background-color: crimson;
             max-height: 55px;
 
             @include lg {
@@ -75,7 +75,7 @@
           h2 {
             font-size: 18px;
             font-weight: 300;
-            background-color: aquamarine;
+            // background-color: aquamarine;
 
             @include lg {
               font-size: 16px;
